@@ -5,14 +5,20 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
+const config = {
+  reactStrictMode: true,
+  swcMinify: true,
+}
+
 module.exports = withPlugins(
   [
     nextTranslate,
     withBundleAnalyzer
-  ], 
-  {
-    reactStrictMode: true,
-    outputStandalone: process.env.IS_DOCKER_BUILD === 'true' ? true : false,
-    swcMinify: true,
-  }
+  ],
+  process.env.IS_DOCKER_BUILD === 'true' ? 
+    {
+      ...config,
+      output: 'standalone'
+    } :
+    config
 );
