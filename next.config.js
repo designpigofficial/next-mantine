@@ -12,8 +12,7 @@ module.exports = withPlugins(
   ], 
   {
     reactStrictMode: true,
-    experimental: {
-      outputStandalone: process.env.IS_DOCKER_BUILD === 'true' ? true : false,
-    },
+    outputStandalone: process.env.IS_DOCKER_BUILD === 'true' ? true : false,
+    swcMinify: true,
   }
 );
